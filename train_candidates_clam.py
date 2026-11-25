@@ -353,6 +353,7 @@ def main():
     parser.add_argument('--average', type=bool, default=True, help='Average the score of max-pooling and bag aggregating')
     parser.add_argument('--stability_lambda', type=float, default=0.0)
     parser.add_argument('--candidate_only', action='store_true')
+    parser.add_argument('--output_dir', default=None, type=str)
     args = parser.parse_args()
     gpu_ids = tuple(args.gpu_index)
     os.environ['CUDA_VISIBLE_DEVICES']=','.join(str(x) for x in gpu_ids)
@@ -413,9 +414,15 @@ def main():
 
     best_score = 0
 
-    save_path = os.path.join('weights/'+args.model, datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))
+    if args.output_dir:
+        save_path = os.path.abspath(args.output_dir)
+        if os.path.exists(save_path):
+            raise FileExistsError(f"Refusing to overwrite candidate run: {save_path}")
+        os.makedirs(save_path, exist_ok=False)
+    else:
+        save_path = os.path.join('weights/'+args.model, datetime.datetime.now().strftime("%Y%m%d%H%M%S%f"))
+        os.makedirs(save_path, exist_ok=True)
     print(save_path)
-    os.makedirs(save_path, exist_ok=True)
     torch.save(
         {k: v.detach().cpu().clone() for k, v in init_dict.items()},
         os.path.join(save_path, 'initial_weights.pth')
