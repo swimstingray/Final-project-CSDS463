@@ -88,19 +88,21 @@ class abmil(nn.Module):
 
     # AUXILIARY METHODS
     def calculate_classification_error(self, X, Y):
-        Y = Y.float()
-        _, Y_hat, _ = self.forward(X)
-        error = 1. - Y_hat.eq(Y).cpu().float().mean().data.item()
-
-        return error, Y_hat
+        """Return binary classification error and predictions for one bag."""
+        logits, _ = self.forward(X)
+        targets = Y.float().reshape_as(logits)
+        predictions = (torch.sigmoid(logits) >= 0.5).to(targets.dtype)
+        error = 1.0 - predictions.eq(targets).float().mean().item()
+        return error, predictions
 
     def calculate_objective(self, X, Y):
-        Y = Y.float()
-        Y_prob, _, A = self.forward(X)
-        Y_prob = torch.clamp(Y_prob, min=1e-5, max=1. - 1e-5)
-        neg_log_likelihood = -1. * (Y * torch.log(Y_prob) + (1. - Y) * torch.log(1. - Y_prob))  # negative log bernoulli
-
-        return neg_log_likelihood, A
+        """Return per-output BCE-with-logits loss and attention weights."""
+        logits, attention = self.forward(X)
+        targets = Y.float().reshape_as(logits)
+        loss = F.binary_cross_entropy_with_logits(
+            logits, targets, reduction="none"
+        )
+        return loss, attention
 
 
 
