@@ -73,6 +73,7 @@ def main():
     for arch in ARCH:
         for seed in (1, 2, 3):
             b = baseline[(arch, seed)]
+            data[arch]["baseline"].append(b)
             for method in METHODS:
                 val = weighted[(arch, seed, method)]
                 delta = val - b
@@ -80,7 +81,6 @@ def main():
                                  equal_weight_validation_auc=b,
                                  weighted_validation_auc=val,
                                  delta_vs_equal_weight=delta))
-                data[arch]["baseline"].append(b)
                 data[arch][method].append(val)
 
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
