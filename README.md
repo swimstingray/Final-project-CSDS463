@@ -6,6 +6,22 @@ The experiments compare standard validation-based candidate selection with stabi
 
 **Main finding:** Stability-aware selection reduced the observed standard deviation of CLAM's held-out test AUC across three seeds, but also reduced its mean test AUC. DSMIL showed a very small improvement in mean test AUC with essentially unchanged variability. These results do not establish a consistent performance benefit from stability-aware selection.
 
+## Current repository map (November 27, 2026)
+
+The main discussion below documents the original CLAM/DSMIL stability-aware comparison. Additional completed experiments are available and should **not** be confused with the original matched test comparison:
+
+| Workstream | Code | Results | Evaluation scope |
+|---|---|---|---|
+| Original standalone/baseline/stability CLAM and DSMIL | `standalone_comparison.py`, `evaluate_heldout.py` | [Three-way comparison](final_results/three_way_summary.csv), [test records](final_results/all_results.csv) | Held-out test |
+| Matched ABMIL standalone/baseline/stability | `evaluate_abmil_heldout.py`, `prepare_abmil_fusions.py` | [ABMIL summary](final_results/abmil_three_way_summary.csv), [test records](heldout_evaluation/abmil_test_auc_results.csv) | Held-out test (separate protocol) |
+| Experiment A — cross-architecture probability averaging | `experiment_a_ensemble.py` | [Validation measurements](experiment_a_outputs/validation_auc_results.csv), [summary](experiment_a_outputs/validation_summary.csv) | Validation only |
+| Experiment B — greedy model soups | `experiment_b_greedy_soup.py` | [Validation summary](final_results/experiment_b_summary.csv), [selection manifests](experiment_b_outputs/) | Validation only |
+| AUC/stability-weighted parameter merging | `prepare_abmil_weighted_fusions.py`, `prepare_other_weighted_fusions.py` | Completed training jobs; consolidated comparison still needed | No consolidated performance claim |
+
+See the [six paper figures and captions](paper_figures/README.md), [manuscript draft](report/Project2_Manuscript_Draft.md), [project submission checklist](PROJECT2_COMPLETION.md), and [repository audit](REPOSITORY_AUDIT.md).
+
+**Important:** Results from a common validation set used for model selection are exploratory. Three-seed held-out measurements are descriptive, not statistical evidence of a generalizable improvement. Feature data and checkpoint weights are intentionally excluded from version control.
+
 ## 1. Background and Project Attribution
 
 Multiple instance learning is commonly used in digital pathology to classify whole-slide images using collections of patch-level features. Predictions can vary across training runs because of initialization, optimization, and model selection.
