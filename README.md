@@ -448,7 +448,6 @@ The original proposal's **non-fused standalone MIL** comparator has now been tra
 
 The standalone method achieved the highest observed mean and minimum test AUC for both architectures. With only three seeds, these are descriptive comparisons, **not** statistical proof of superiority. Archived standalone training/evaluation timings and job identifiers are recorded in [`final_results/standalone_job_times.csv`](final_results/standalone_job_times.csv). Validate all three methods with `python3 verify_three_way.py`; the original checkpoint files remain excluded from GitHub. Historical ABMIL results were not obtained under this matched protocol and are not included.
 
-A detailed [Project 2 completion and submission checklist](PROJECT2_COMPLETION.md) tracks experimental, reporting, attribution, and Canvas requirements. Generate a source-code submission archive locally with `bash package_project2_code.sh` after synchronizing the repository with Pioneer. Neither the compiled course report nor its PowerPoint presentation is part of this source-only Git repository as of this update.
+A detailed [Project 2 completion and submission checklist](PROJECT2_COMPLETION.md) tracks experimental, reporting, attribution, and Canvas requirements. Generate a source-code submission archive locally with `bash package_project2_code.sh` after synchronizing the repository with Pioneer. 
 
-
-**Reproduction on Pioneer:** `bash submit_standalone_all.sh` can be used to generate a fresh standalone comparison from the original ignored candidate checkpoints, but must **not** be rerun over the completed outputs. The recorded November 25 jobs have already finished successfully.
+**Reproduction on Pioneer:** `bash submit_standalone_all.sh` can be used to generate a fresh standalone comparison from the original ignored candidate checkpoints, but must **not** be rerun over the completed outputs. 
