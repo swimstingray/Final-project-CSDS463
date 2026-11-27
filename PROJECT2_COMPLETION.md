@@ -1,5 +1,8 @@
 # CSDS/EBME 463 Project 2 — submission and research audit
 
+> **Historical scope note (updated November 27, 2026):** The completion status below documents the original CLAM/DSMIL Project 2 comparison. Subsequent experiments are now committed: matched ABMIL standalone/baseline/stability evaluation ([summary](final_results/abmil_three_way_summary.csv)), [Experiment A](experiment_a_outputs/validation_auc_results.csv), [Experiment B](final_results/experiment_b_summary.csv), and [six final paper figures](paper_figures/README.md). Therefore the historical statement that ABMIL was not reevaluated applies only to the original CLAM/DSMIL protocol, not to the current overall repository. See [repository audit](REPOSITORY_AUDIT.md) for a current file map and outstanding tasks.
+
+
 The course requires: a standard research paper with cover page, abstract (maximum 250 words), introduction, methods, results with figures/tables, discussion, conclusion, references, and appendices; no more than **six body pages** (cover, references, appendices excluded); a separate source-code ZIP; and a PowerPoint presentation. The PDF report is due December 1, 2026, at 2:30 PM EST, and PPTX material November 30, 2026, at 2:30 PM EST, unless Canvas announcements supersede the posted document.
 
 ## Verified completed
