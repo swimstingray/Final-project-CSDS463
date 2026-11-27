@@ -1,6 +1,6 @@
 # Paper figures — CSDS463 MIL fusion project
 
-This folder contains six vector **SVG figures** tracked directly in GitHub. **The original 300-dpi PNG and vector PDF exports are not in GitHub yet**; they are in the separate figure pack generated in ChatGPT and can be copied into this folder before a normal `git add/commit/push` from Pioneer or another authenticated Git client.
+This folder contains all six editable **SVG figures**, their final **300-dpi PNG and vector PDF exports** in [`exports/`](exports/), paper-ready captions, and a plotting script. The exports were generated on Pioneer from the committed result tables.
 
 ## Figure index
 
@@ -22,7 +22,7 @@ This folder contains six vector **SVG figures** tracked directly in GitHub. **Th
 
 **Do not interpret A or B plots as held-out test outcomes.** Experiment B selected checkpoints on the same validation slides used in its AUC comparison. The held-out analyses have only three seeds and their sample standard deviations are descriptive.
 
-**Outstanding figures:** Weighted TIES variants (AUC-weighted versus stability-weighted) have completed training but require a verified results table before plotting. ABMIL held-out exists on Pioneer but is not included in Figure 2; avoid adding invented values.
+**Outstanding figures:** Weighted TIES variants (AUC-weighted versus stability-weighted) have completed training but require a verified results table before plotting. Matched ABMIL held-out results are committed at [`../heldout_evaluation/abmil_test_auc_results.csv`](../heldout_evaluation/abmil_test_auc_results.csv) but are not included in Figure 2; do not merge them into the CLAM/DSMIL plot without clearly documenting the protocol differences.
 
 ## Generating local PNG/PDF exports
 
@@ -32,9 +32,7 @@ Use the tracked plotting script from the repository root on Pioneer:
 python paper_figures/plot_from_pioneer.py
 ```
 
-The script reads exact on-cluster CSVs and generates `paper_figures/exports/`.
-
-The script reads real saved CSVs and writes six 300-dpi PNGs and six vector PDFs. The files in this GitHub folder are **SVG companions**, not byte-identical copies of the local package exports.
+The script reads committed CSVs and writes six 300-dpi PNGs and six vector PDFs. It intentionally refuses to overwrite an existing nonempty `exports/` folder; generate into a new clean working copy when reproducing. The files in this GitHub folder are **SVG companions**, not byte-identical copies of the local package exports.
 
 ## Captions
 
@@ -44,5 +42,5 @@ See [FIGURE_CAPTIONS.md](FIGURE_CAPTIONS.md) for paper-ready captions and limita
 
 - `paper_figures/`: shareable figure assets and caption documentation.
 - `final_results/`: existing summary tables and result figures.
-- `experiment_a_outputs/`, `experiment_b_outputs/`: local Pioneer experiment artifacts; model checkpoints and slide-level feature files should not be committed without an explicit need and review.
-- `create_paper_figures.py` (project root, after adding from the package): regenerate figures from local results.
+- [`../experiment_a_outputs/`](../experiment_a_outputs/), [`../experiment_b_outputs/`](../experiment_b_outputs/): committed validation results, manifests, and selection traces. Model checkpoints and feature files remain excluded.
+- [`plot_from_pioneer.py`](plot_from_pioneer.py): regenerate figures from saved CSV results.
